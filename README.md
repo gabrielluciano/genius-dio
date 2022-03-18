@@ -9,8 +9,9 @@ Genius é um jogos dos anos 80 onde o objetivo é acertar uma sequência de core
 ## Principais mudanças em relação ao projeto inicial
 Este projeto sofreu algumas modificações em relação ao [projeto original](https://github.com/SpruceGabriela/genesis-dio):
 
-- Utilização de uma classe GeniusGame para controlar as regras do jogo;
+- Utilização de uma classe GeniusGame para controlar as regras do jogo.
 - Criação de um modal em substituição ao alert para interação do usuário.
+- Adicionados **Sons!** em 8 bits assim como no jogo original!
 
 ## Principais Tecnologias e Bibliotecas utilizadas:
-- HTML, CSS e JavaScript
+- HTML, CSS, JavaScript e Tone.js

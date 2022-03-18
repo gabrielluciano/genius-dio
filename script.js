@@ -17,9 +17,12 @@ class GeniusGame {
   userOrder = [];
   status = "waiting";
   score = 0;
+  soundControl = false;
+  soundMap = ["A4", "B4", "D4", "E4"]
 
-  constructor(colorElements) {
+  constructor(colorElements, sound) {
     this.colorElements = colorElements;
+    this.sound = sound;
   }
 
   // Generate random order for current level
@@ -92,6 +95,7 @@ class GeniusGame {
 
     setTimeout(() => {
       element.classList.add("selected");
+      if (this.soundControl) this.sound.triggerAttackRelease(this.soundMap[elementIndex], "8n");
     }, duration * 1200);
 
     setTimeout(() => {
@@ -120,6 +124,9 @@ const blue = document.querySelector(".blue");
 const modal = document.querySelector(".modal");
 const modalButton = document.querySelector(".start_game");
 
+// Checkbox to allow sounds
+const soundCheckbox = document.querySelector("input#sound");
+
 // Displays modal with specifics title and button texts
 function renderModal(titleText, buttonText) {
   const title = modal.querySelector("h2");
@@ -129,8 +136,23 @@ function renderModal(titleText, buttonText) {
   modal.classList.remove("hide");
 }
 
+// Tone.js
+// Sounds
+//create a synth and connect it to the main output (your speakers)
+const synth = new Tone.Synth().toDestination();
+
+// Handle audio
+soundCheckbox.addEventListener("change", () => {
+  console.log("hey");
+  if (soundCheckbox.checked) {
+    game.soundControl = true;
+  } else {
+    game.soundControl = false;
+  }
+});
+
 // Game instance
-const game = new GeniusGame([green, red, yellow, blue]);
+const game = new GeniusGame([green, red, yellow, blue], synth);
 
 // Starts game 1 sec after modalButton is clicked
 modalButton.onclick = () => {
